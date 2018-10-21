@@ -48,9 +48,7 @@ module.exports = function(app, passport) {
 						"name": "city",
 						"type": "string"
 					}]
-				}]
-			}]},
-			"services": [{
+				}],
 				"name": "twitch",
 				"widgets": [{
 					"name": "show_stream",
@@ -59,9 +57,7 @@ module.exports = function(app, passport) {
 						"name": "channel",
 						"type": "string"
 					}]
-				}]
-			}],
-			"services": [{
+				}],
 				"name": "twitter",
 				"widgets": [{
 					"name": "timeline",
@@ -72,6 +68,7 @@ module.exports = function(app, passport) {
 					}]
 				}]
 			}]
+		},
     	})));
     
     
