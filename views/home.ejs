@@ -13,24 +13,6 @@
     <script src="/home.js"></script>
     <style>
         body        { padding-top:80px; }
-	.Degrade{
-		background:
-			repeating-linear-gradient(190deg, rgba(255, 0, 0, 0.5) 40px,
-			rgba(255, 153, 0, 0.5) 80px, rgba(255, 255, 0, 0.5) 120px,
-        		rgba(0, 255, 0, 0.5) 160px, rgba(0, 0, 255, 0.5) 200px,
-        		rgba(75, 0, 130, 0.5) 240px, rgba(238, 130, 238, 0.5) 280px,
-        		rgba(255, 0, 0, 0.5) 300px),
-		      	repeating-linear-gradient(-190deg, rgba(255, 0, 0, 0.5) 30px,
-        		rgba(255, 153, 0, 0.5) 60px, rgba(255, 255, 0, 0.5) 90px,
-        		rgba(0, 255, 0, 0.5) 120px, rgba(0, 0, 255, 0.5) 150px,
-        		rgba(75, 0, 130, 0.5) 180px, rgba(238, 130, 238, 0.5) 210px,
-        		rgba(255, 0, 0, 0.5) 230px),
-      			repeating-linear-gradient(23deg, red 50px, orange 100px,
-        		yellow 150px, green 200px, blue 250px,
-        		indigo 300px, violet 350px, red 370px);
-  		background-attachment: fixed;
-	}
-
 	.jumbotron {
 		color: #999;
 		background-color: rgba(0,0,0, 0.5) 
@@ -43,9 +25,17 @@
 		width: 500px;
 		font-size: 35px;
 	}
+
+	.auth-button:hover,
+	.auth-button:focus {
+		background-color: #9999;
+		font-size: 30px;
+		border-color: #777;
+	}
 	.auth-button {
 		background-color: #999;
 		font-size: 30px;
+		border-color: #777;
 	}
 	.modal.fade.in {
 		top: 5%;
@@ -54,7 +44,7 @@
     </style>
 </head>
  
-<body class="Degrade">
+<body style="background: #354e75">
 	
 	<div class="modal fade" id="login-modal" role="dialog">
 		
@@ -85,10 +75,6 @@
 
 						<button type="submit" class="btn btn-warning btn-lg">Login</button>
 					</form>
-					<hr>
-					<p>Need an account? <a href="/signup">Signup</a></p>
-					<p>Or go <a href="/">home</a>.</p>
-
 				</div>
 			</div>
 		</div>
@@ -124,9 +110,6 @@
 							</form>
 						    
 							<hr>
-						    
-							<p>Already have an account? <a href="/">Login</a></p>
-	
 					</div>
 				</div>
 			</div>
@@ -137,8 +120,8 @@
 		<div class="jumbotron text-center">
 			<h1><span class="fa"></span>Dashboard</h1>
 			<p>Login or Register with:</p>
-			<button id="register-btn" class="btn-danger auth-button"><span class="fa"></span>Signup</button>
 			<button id="login-btn" class="btn-danger auth-button"><span class="fa"></span>Login</button>
+			<button id="register-btn" class="btn-danger auth-button"><span class="fa"></span>Signup</button>
 		</div>
 	
 		<div class="social-button">

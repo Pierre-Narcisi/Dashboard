@@ -28,11 +28,53 @@ module.exports = function(app, passport) {
 			user : req.user
 		});
 	});
-    
+	
 	app.get('/logout', function(req, res) {
 		req.logout();
 		res.redirect('/');
 	});
+
+
+	app.get("/about.json", (req, res) => res.send(JSON.stringify({
+		"client": {
+	    	"host": `${req.ip}`
+		}, "server": { "current_time": (new Date).getTime(), 
+			"services": [{
+				"name": "weather",
+				"widgets": [{
+					"name": "city_temperature",
+					"description": "Affichage de la temperature pour une ville",
+					"params": [{
+						"name": "city",
+						"type": "string"
+					}]
+				}]
+			}]},
+			"services": [{
+				"name": "twitch",
+				"widgets": [{
+					"name": "show_stream",
+					"description": "Affiche le stream d'un streameur",
+					"params": [{
+						"name": "channel",
+						"type": "string"
+					}]
+				}]
+			}],
+			"services": [{
+				"name": "twitter",
+				"widgets": [{
+					"name": "timeline",
+					"description": "Affiche la timeline d'un usager",
+					"params": [{
+						"name": "channel",
+						"type": "string"
+					}]
+				}]
+			}]
+    	})));
+    
+    
 
 	app.get('/auth/google', passport.authenticate('google', { scope : ['profile', 'email'] }));
 
@@ -51,6 +93,7 @@ module.exports = function(app, passport) {
 			successRedirect : '/dashboard',
 			failureRedirect : '/'
 		}));
+	
 	  
 	
 };

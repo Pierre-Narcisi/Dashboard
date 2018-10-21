@@ -1,72 +1,199 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<meta charset="utf-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Dashboard</title>
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-  	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
-  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
-  	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.css">
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.js"></script>
-	<script src="/widget.js"></script>
-	<script src="/grid.js"></script>
-	<script>$(function(){ //DOM Ready
-			$(".gridster ul").gridster({
-			    widget_margins: [10, 10],
-			    widget_base_dimensions: [140, 140]
-			});
-		});
-	</script>
-	<style>
-	.Degrade{
-		background:
-			repeating-linear-gradient(190deg, rgba(255, 0, 0, 0.5) 40px,
-			rgba(255, 153, 0, 0.5) 80px, rgba(255, 255, 0, 0.5) 120px,
-        		rgba(0, 255, 0, 0.5) 160px, rgba(0, 0, 255, 0.5) 200px,
-        		rgba(75, 0, 130, 0.5) 240px, rgba(238, 130, 238, 0.5) 280px,
-        		rgba(255, 0, 0, 0.5) 300px),
-		      	repeating-linear-gradient(-190deg, rgba(255, 0, 0, 0.5) 30px,
-        		rgba(255, 153, 0, 0.5) 60px, rgba(255, 255, 0, 0.5) 90px,
-        		rgba(0, 255, 0, 0.5) 120px, rgba(0, 0, 255, 0.5) 150px,
-        		rgba(75, 0, 130, 0.5) 180px, rgba(238, 130, 238, 0.5) 210px,
-        		rgba(255, 0, 0, 0.5) 230px),
-      			repeating-linear-gradient(23deg, red 50px, orange 100px,
-        		yellow 150px, green 200px, blue 250px,
-        		indigo 300px, violet 350px, red 370px);
-  		background-attachment: fixed;
-	}
-	.gridster li {
-		border: 5px solid black
-	}
-	.gridster ul {
-		list-style: none
-	}
-	.nav-class {
-		color: #003f91
-	}
-	.body-class {
-		background-color: #e5f4e3
-	}
-	</style>
-</head>
-<body class="Degrade">
-	<nav class="navbar navbar-default" style="background-color: #999">
-		<div class="container-fluid">
-			<div class="navbar-header">
-				<a class="navbar-brand" href="#" img="logo.jpg">Dashboard</a>
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>Dashboard</title>
+		<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css"> -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+  		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css">
+  		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+  		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.css">
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.gridster/0.5.6/jquery.gridster.min.js"></script>
+		<script src="https://embed.twitch.tv/embed/v1.js"></script>
+		<script src="/widget.js"></script>
+		<script src="/grid.js"></script>
+		<script>
+			twitch = function(channel) {
+				if( typeof twitch.counter == 'undefined' ) {
+					twitch.counter = 0;
+				}
+				var gridster = $(".gridster ul").gridster().data("gridster");
+				gridster.add_widget('<li id="twitch"><header>|||<button type="button" class="remove">&times;</button></header><div id="twitch-embed"></div></li>', 5, 3);
+				var twitchid = document.getElementById("twitch-embed");
+				twitchid.id = "twitch-embed" + twitch.counter;
+				var twtchid = document.getElementById("twitch");
+				twtchid.id = 
+				new Twitch.Embed("twitch-embed" + twitch.counter, {
+	    				width: 780,
+					height: 460,
+	    				channel: channel
+				});
+				twitch.counter++;
+			}
+		</script>
+		<script>
+			closeWidget = function() {
+
+			}
+		</script>
+		<script>
+			window.twttr = (function(d, s, id) {
+				var js, fjs = d.getElementsByTagName(s)[0],
+				  t = window.twttr || {};
+				if (d.getElementById(id)) return t;
+				js = d.createElement(s);
+				js.id = id;
+				js.src = "https://platform.twitter.com/widgets.js";
+				fjs.parentNode.insertBefore(js, fjs);
+				t._e = [];
+				t.ready = function(f) {
+				  t._e.push(f);
+				};
+			      
+				return t;
+			      }(document, "script", "twitter-wjs"));
+		</script>
+		<script>
+			twtter = function(channel) {
+				if( typeof twtter.counter == 'undefined' ) {
+					twtter.counter = 0;
+				}
+				var gridster = $(".gridster ul").gridster().data("gridster");
+				gridster.add_widget('<li><header>|||<button type="button" class="remove">&times;</button></header><div id="timeline" + twtter.counter++></div></li>', 3, 5);
+				var twtterid = document.getElementById("timeline");
+				twtterid.id = "timeline" + twtter.counter;
+				twttr.widgets.createTimeline({
+					sourceType: 'profile',
+					screenName: channel
+				},
+				document.getElementById('timeline' + twtter.counter), {
+					width: '450',
+					height: '700'
+				})
+				twtter.counter++;
+			};
+		</script>
+		<style>
+			.remove {
+  				color: #777;
+  				font: 14px/100% arial, sans-serif;
+  				position: absolute;
+  				right: 5px;
+  				text-decoration: none;
+  				text-shadow: 0 1px 0 #fff;
+  				top: 5px;
+			}
+			.remove:after {
+				content: '✖';
+  			}
+
+			.icon:hover {
+				cursor: pointer;	
+			}
+
+			.icon {
+				width: 100px;
+				padding: 10px;
+			}
+			.gridster li header {
+		        	background: #c0c0c0;
+	        		display: block;
+        			font-size: 20px;
+        			line-height: normal;
+				padding: 4px 0 6px;
+				cursor: move;
+				text-align: center;
+			}
+			.gridster ul {
+				list-style: none
+			}
+			.nav-class {
+				color: #003f91
+			}
+			.body-class {
+				background-color: #e5f4e3
+			}
+			#add-widget:hover {
+				cursor: pointer;
+			}
+		</style>
+	</head>
+	<body style="background: #354e75">
+		<nav class="navbar navbar-default" style="background-color: #999">
+			<div class="container-fluid">
+				<div class="navbar-header">
+					<a class="navbar-brand" href="#" img="logo.jpg">Dashboard</a>
+				</div>
+				<ul class="nav navbar-nav">
+					<li class="active"><a href="#">Home</a></li>
+					<li><a href="/logout">Logout</a></li>
+					<li><a id="add-widget">Add Widget</a></li>
+				</ul>
 			</div>
-			<ul class="nav navbar-nav">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="/logout">Logout</a></li>
-				<li><a id="add-widget">Add Widget</a></li>
+		</nav>
+		<div class="gridster">
+			<ul>
 			</ul>
 		</div>
-	</nav>
-	<div class="gridster">
-		<ul>
-		</ul>
-	</div>
+
+
+		<div class="modal fade" id="widget-modal" role="dialog" style="width: 730;">
+		
+			<div class="modal-dialog">
 	
-</body>
+				<div class="modal-content">
+					
+					<div class="modal-header" style="padding:35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h1><span class="fa fa-sign-in"></span>Widgets</h1>
+					</div>
+					<div class="modal-body" style="padding:40px 50px;">
+						<img src="/ressources/weather.png" id="weather-btn" class="icon">
+						<img src="/ressources/twitch.svg" id="twitch-btn" class="icon">
+						<img src="/ressources/twitter.svg" id="twitter-btn" class="icon">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="twitch-modal" role="dialog" style="width: 730;">
+		
+			<div class="modal-dialog">
+	
+				<div class="modal-content">
+					
+					<div class="modal-header" style="padding:35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h1><span class="fa fa-sign-in"></span>Channel</h1>
+					</div>
+					<div class="modal-body" style="padding:40px 50px;">
+						<form action="javascript:twitch(channel.value)">
+							<input type="text" name="channel" id="channel">
+							<input type="submit" value="Submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="twitter-modal" role="dialog" style="width: 730;">
+		
+			<div class="modal-dialog">
+		
+				<div class="modal-content">
+						
+					<div class="modal-header" style="padding:35px 50px;">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h1><span class="fa fa-sign-in"></span>Timeline</h1>
+					</div>
+					<div class="modal-body" style="padding:40px 50px;">
+						<form action="javascript:twtter(tmline.value)">
+							<input type="text" name="tmline" id="tmline">
+							<input type="submit" value="Submit">
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+
+	</body>
 </html>
